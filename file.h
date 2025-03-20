@@ -4,9 +4,9 @@
 
 typedef struct { 
    char *name;
-   int childCount
-   int sibCount
-   int fileCount
+   int childCount;
+   int sibCount;
+   int fileCount;
    Directory *parent;
    Dirctory *child[MAXSIZE];
    Directory *siblings[MAXSIZE];
