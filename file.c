@@ -18,6 +18,7 @@ void *createDirectory(Directory *parent, char *name) {
         dir->name = strdup(name);
         dir->parent = parent;
         dir->child = NULL;
+        dir->childCount = 0;
         dir->siblings = parent->child;
    }
    parent->child[parent->childCount] = dir;
