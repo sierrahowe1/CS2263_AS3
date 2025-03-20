@@ -29,7 +29,7 @@ Directory *createDirectory(Directory *parent, char *name) {
    return dir;
 }
 
-void createFile(Directory *parent, char *name, int size) {
+File *createFile(Directory *parent, char *name, int size) {
    File *file = (File *)malloc(sizeof(File));
    if(file == NULL) {
       printf("Could not allocate memory");
@@ -46,6 +46,8 @@ void createFile(Directory *parent, char *name, int size) {
    }
    parent->file[parent->fileCount] = file;
    parent->fileCount++;
+
+   return file;
 }
 
 
