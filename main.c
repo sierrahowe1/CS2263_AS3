@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include "string.h"
 
-
-void *createDirectory(Directory *parent, char *name);
-void *createFile(Directory *parent, char *name, int size);
+Directory *createDirectory(Directory *parent, char *name);
+File *createFile(Directory *parent, char *name, int size);
 void listDirectory(Directory *dir);
 
 int main(int argc, char * * argv) {
