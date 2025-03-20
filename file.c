@@ -4,7 +4,7 @@
 #include "string.h"
 
 
-void *createDirectory(Directory *parent, char *name) {
+Directory *createDirectory(Directory *parent, char *name) {
    Directory *dir = (Directory *)malloc(sizeof(Directory));
    if(dir == NULL) {
       printf("Could not allocate memory");
@@ -19,10 +19,14 @@ void *createDirectory(Directory *parent, char *name) {
         dir->parent = parent;
         dir->child = NULL;
         dir->childCount = 0;
+        dir->sibCount = 0;
+        dir->fileCount = 0;
         dir->siblings = parent->child;
    }
    parent->child[parent->childCount] = dir;
    parent->childCount++;
+
+   return dir;
 }
 
 void createFile(Directory *parent, char *name, int size) {
