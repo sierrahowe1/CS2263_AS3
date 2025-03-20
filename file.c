@@ -1,52 +1,58 @@
 #include "file.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "string.h"
 
 
-Directory *createDirectory(Directory *parent, char *name) {
+void *createDirectory(Directory *parent, char *name) {
    Directory *dir = (Directory *)malloc(sizeof(Directory));
    if(dir == NULL) {
       printf("Could not allocate memory");
       return NULL;
    }
    
-   dir->name = strdup(name);
-   dir->parent = parent;
-   dir->child = NULL;
-   dir->siblings = parent->child;
-   return dir;
+   if(parent->childCount >= 20) {
+   	printf("Not today");
+   }
+   else {
+        dir->name = strdup(name);
+        dir->parent = parent;
+        dir->child = NULL;
+        dir->siblings = parent->child;
+   }
+   parent->child[parent->childCount] = dir;
+   parent->childCount++;
 }
 
-File createFile(Directory *parent, char *name, int size) {
+void createFile(Directory *parent, char *name, int size) {
    File *file = (File *)malloc(sizeof(File));
    if(file == NULL) {
       printf("Could not allocate memory");
       return NULL;
    }
-   
-   file->name = strdup(name);
-   file->parent = parent;
-   file->size = size;
-   
-   return file;
 
+   if(parent->fileCount >= 20) {
+   	printf("Not today");
+   }
+   else {
+        file->name = strdup(name);
+        file->parent = parent;
+        file->size = size;
+   }
+   parent->file[parent->fileCount] = file;
+   parent->fileCount++;
 }
 
-void addFile(char *name, int size, Directory *parent) {
-   File *file = createFile(name, size, parent);
-   if()
-}
 
-void addDirectory() {
-
-
-
-}
-
-void listDirectory(Directory dir) {
-   for(int i = 0; i < )
-   
-
+void listDirectory(Directory *dir) {
+   printf("%s\n", dir->name);
+   for (int i = 0; i < dir->childCount; i++) {
+      printf(" -");
+      listDirectory(dir->child[i]);
+   }
+   for (int i = 0; i < dir->fileCount; i++) {
+      printf(" -%s\n", dir->file[i]->name);
+   } 
 }
 
 void searchDirectory(Directory dir, char *targetName) {
