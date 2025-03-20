@@ -17,26 +17,8 @@ int main(int argc, char * * argv) {
                 
                 printf("Enter Directory Name: ");
                 scanf(" %[^\n]", name);  
-                printf("Enter species: ");
-                scanf(" %[^\n]", species);
-                printf("Enter Planet Name: ");
-                scanf(" %[^\n]", planet_name);
-                printf("Enter Age: ");
-                scanf("%d", &age);
-                addAlienPet(pets, &count, name, species, age, planet_name);
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+          
+                createDirectory();
 				
                 break;
 
@@ -46,7 +28,7 @@ int main(int argc, char * * argv) {
 
             case 3: // Exit
                 
-                freeAllAlienPets(pets, &count);
+                freeFile();
                 return 0;
 
             default:
