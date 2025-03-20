@@ -13,26 +13,8 @@ Directory *createDirectory(Directory *parent, char *name) {
    dir->name = strdup(name);
    dir->parent = parent;
    dir->child = NULL;
-   dir->siblings = NULL;
-   
-   if(parent != NULL) {
-      if(parent->child != NULL) {
-         parent->child = dir;
-      }
-      else {
-         Directory *dirSib = parent->child;
-         
-         
-      }
-   
-   
-   
-   }
-   
+   dir->siblings = parent->child;
    return dir;
-   
-   
-
 }
 
 File createFile(Directory *parent, char *name, int size) {
@@ -50,7 +32,20 @@ File createFile(Directory *parent, char *name, int size) {
 
 }
 
-void listDirectory(Directory dir, int depth) {
+void addFile(char *name, int size, Directory *parent) {
+   File *file = createFile(name, size, parent);
+   if()
+}
+
+void addDirectory() {
+
+
+
+}
+
+void listDirectory(Directory dir) {
+   for(int i = 0; i < )
+   
 
 }
 
