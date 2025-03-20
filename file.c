@@ -5,29 +5,29 @@
 
 
 Directory *createDirectory(Directory *parent, char *name) {
-   Directory *dir = (Directory *)malloc(sizeof(Directory));
-   if(dir == NULL) {
-      printf("Could not allocate memory");
-      return NULL;
-   }
-   
-   if(parent->childCount >= 20) {
-   	printf("Not today");
-   }
-   else {
-        dir->name = strdup(name);
-        dir->parent = parent;
-        dir->child = NULL;
-        dir->childCount = 0;
-        dir->sibCount = 0;
-        dir->fileCount = 0;
-        dir->siblings = parent->child;
-   }
-   parent->child[parent->childCount] = dir;
-   parent->childCount++;
+    Directory *dir = (Directory *)malloc(sizeof(Directory));
+    if (dir == NULL) {
+        printf("Could not allocate memory\n");
+        return NULL;
+    }
 
-   return dir;
+    dir->name = strdup(name); 
+    dir->parent = parent;     
+    dir->childCount = 0;      
+    dir->fileCount = 0;       
+
+    if (parent != NULL) {
+        if (parent->childCount >= 20) {
+            printf("Not today");
+            return NULL;
+        }
+        parent->child[parent->childCount] = dir;
+        parent->childCount++;
+    }
+
+    return dir; 
 }
+
 
 File *createFile(Directory *parent, char *name, int size) {
    File *file = (File *)malloc(sizeof(File));
