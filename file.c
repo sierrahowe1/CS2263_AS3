@@ -55,7 +55,7 @@ void listDirectory(Directory *dir) {
    } 
 }
 
-void searchDirectory(Directory dir, char *targetName) {
+void searchDirectory(Directory *dir, char *targetName) {
    if(dir == NULL) {
       return;
    }
@@ -74,7 +74,7 @@ void searchDirectory(Directory dir, char *targetName) {
 
 }
 
-void freeDirectory(Directory dir) {
+void freeDirectory(Directory *dir) {
 
 }
 
