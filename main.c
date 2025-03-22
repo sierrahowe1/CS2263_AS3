@@ -6,6 +6,7 @@
 Directory *createDirectory(Directory *parent, char *name);
 File *createFile(Directory *parent, char *name, int size);
 void listDirectory(Directory *dir);
+void searchDirectory(Directory *dir, char *targetName);
 
 int main(int argc, char * * argv) {
 
@@ -13,6 +14,8 @@ int main(int argc, char * * argv) {
     int choice;
     char name[MAXSIZE];
     int size;
+    char targetName[MAXSIZE];
+    int depth = 0;
 
     while (1) {
         printf("\nMenu:\n");
@@ -44,11 +47,13 @@ int main(int argc, char * * argv) {
                 break;
 
             case 4:
-                printf("Invalid choice. Please try again.\n");
+                printf("Enter Target Name: ");
+                scanf("%s", targetName);
+                searchDirectory(root, targetName);
                 break;
 
             case 5:
-                printf("Invalid choice. Please try again.\n");
+                
                 return 0;
 
             default:
@@ -56,6 +61,3 @@ int main(int argc, char * * argv) {
                 break;
         }
     }
-
-    return 0;
-}
