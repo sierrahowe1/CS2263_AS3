@@ -14,11 +14,9 @@ typedef struct {
 typedef struct Directory { 
    char *name;
    int childCount;
-   int sibCount;
    int fileCount;
    Directory *parent;
    Directory *child[MAXSIZE];
-   Directory *siblings[MAXSIZE];
    File *file[MAXSIZE];
 } Directory;
 
