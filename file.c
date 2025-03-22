@@ -69,10 +69,12 @@ void searchDirectory(Directory *dir, char *targetName) {
    if(strcmp(dir->name, targetName) == 0) {
       printf("The directory has been found.\n", dir->name);
    }
+   
    for(int i = 0; i < dir->fileCount; i++) {
-      if(strcmp(dir->file[i].name, targetName) == 0) {
-         printf("This file has been found./n", dir->file[i].name);
+      if(strcmp(dir->file[i]->name, targetName) == 0) {
+         printf("This file has been found.\n", dir->file[i]->name);
       }
+      
    }
 
    for(int i = 0; i < dir->childCount; i++) {
