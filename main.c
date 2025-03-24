@@ -73,7 +73,7 @@ int main(int argc, char * * argv) {
                 break;
 
             case 5:
-                freeDirectory(parent);
+                freeDirectory(root);
                 return 0;
 
             default:
