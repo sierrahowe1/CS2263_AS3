@@ -5,17 +5,20 @@
 
 Directory *createDirectory(Directory *parent, char *name);
 File *createFile(Directory *parent, char *name, int size);
-void listDirectory(Directory *dir);
+void listDirectory(Directory *dir, int depth);
 void searchDirectory(Directory *dir, char *targetName);
+Directory *findDirectory(Directory *dir, char *targetName);
 
 int main(int argc, char * * argv) {
 
     Directory *root = createDirectory(NULL, "root");
     int choice;
     char name[MAXSIZE];
+    char pname[MAXSIZE];
     int size;
     char targetName[MAXSIZE];
     int depth = 0;
+    Directory *parent;
 
     while (1) {
         printf("\nMenu:\n");
@@ -31,7 +34,15 @@ int main(int argc, char * * argv) {
             case 1: 
                 printf("Enter Directory Name: ");
                 scanf(" %s", name);   
-                createDirectory(root, name);
+                printf("Enter Parent Directory Name: ");
+                scanf(" %s", pname);
+                parent = findDirectory(root, pname);
+                if (parent == NULL) {
+                   printf("Error: Parent directory '%s' not found.\n", pname);
+                } 
+                else {
+                   createDirectory(parent, name);
+                }
                 break;
 
             case 2:
@@ -43,7 +54,7 @@ int main(int argc, char * * argv) {
                 break;
 
             case 3:
-                listDirectory(root);
+                listDirectory(root, 0);
                 break;
 
             case 4:
@@ -61,3 +72,4 @@ int main(int argc, char * * argv) {
                 break;
         }
     }
+}  
