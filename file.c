@@ -12,6 +12,10 @@ Directory *createDirectory(Directory *parent, char *name) {
     }
 
     dir->name = strdup(name); 
+    if(dir->name == NULL) {
+       free(dir);
+       printf("Could not allocate memory.\n");
+    }
     dir->parent = parent;     
     dir->childCount = 0;      
     dir->fileCount = 0;  
@@ -20,6 +24,8 @@ Directory *createDirectory(Directory *parent, char *name) {
     if (parent != NULL) {
         if (parent->childCount >= 20) {
             printf("Not today");
+            free(dir->name);
+            free(dir);
             return NULL;
         }
         parent->child[parent->childCount] = dir;
@@ -54,7 +60,9 @@ File *createFile(Directory *parent, char *name, int size) {
    }
 
    if(parent->fileCount >= 20) {
+      free(file);
    	printf("Not today");
+   	
    }
    else {
         file->name = strdup(name);
