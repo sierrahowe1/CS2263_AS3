@@ -14,7 +14,8 @@ Directory *createDirectory(Directory *parent, char *name) {
     dir->name = strdup(name); 
     dir->parent = parent;     
     dir->childCount = 0;      
-    dir->fileCount = 0;       
+    dir->fileCount = 0;  
+        
 
     if (parent != NULL) {
         if (parent->childCount >= 20) {
@@ -132,25 +133,21 @@ void freeDirectory(Directory *dir) {
       return;
     }
     for(int i = 0; i < dir->fileCount; i++) {
-       free(dir->file[i]->name)
-       free(dir->file[i]);
+       if(dir->file[i] != NULL) {
+          free(dir->file[i]->name);
+          free(dir->file[i]);
+       }
     }
-    free(dir->file);
 
     for(int i = 0; i < dir->childCount; i++) {
-       freeDirectory(dir->child[i]);
+       if(dir->child[i] != NULL) {
+          freeDirectory(dir->child[i]);
+       }
     }
-    free(dir->child);
+    
 
     free(dir->name);
     free(dir);
 
-}
-
-void freeFile(File *file) {
-    if(file != NULL) {
-      free(file->name);
-      free(file);
-    }
 }
 
