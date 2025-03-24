@@ -8,6 +8,7 @@ File *createFile(Directory *parent, char *name, int size);
 void listDirectory(Directory *dir, int depth);
 void searchDirectory(Directory *dir, char *targetName);
 Directory *findDirectory(Directory *dir, char *targetName);
+void freeDirectory(Directory *dir);
 
 int main(int argc, char * * argv) {
 
@@ -48,9 +49,17 @@ int main(int argc, char * * argv) {
             case 2:
                 printf("Enter File Name: ");
                 scanf(" %s", name);
+                printf("Enter Parent Directory Name: ");
+                scanf(" %s", pname);
                 printf("Enter File Size: ");
                 scanf("%d", &size);
-                createFile(root, name, size);
+                parent = findDirectory(root, pname);
+                if(parent == NULL) {
+                   printf("Error: Parent directory '%s' not found.\n", pname);
+                }
+                else {
+                   createFile(parent, name, size);
+                }
                 break;
 
             case 3:
@@ -64,7 +73,7 @@ int main(int argc, char * * argv) {
                 break;
 
             case 5:
-                
+                freeDirectory(parent);
                 return 0;
 
             default:
