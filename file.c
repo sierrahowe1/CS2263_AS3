@@ -84,12 +84,30 @@ void searchDirectory(Directory *dir, char *targetName) {
 }
 
 void freeDirectory(Directory *dir) {
+    if(dir == NULL) {
+      return;
+    }
+    for(int i = 0; i < dir->fileCount; i++) {
+       free(dir->file[i]->name)
+       free(dir->file[i]);
+    }
+    free(dir->file);
+
+    for(int i = 0; i < dir->childCount; i++) {
+       freeDirectory(dir->child[i]);
+    }
+    free(dir->child);
+
+    free(dir->name);
+    free(dir);
 
 }
 
 void freeFile(File *file) {
-   free(file->name);
-   free(file);
+    if(file != NULL) {
+      free(file->name);
+      free(file);
+    }
 }
 
 
