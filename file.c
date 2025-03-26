@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "string.h"
 
+#define MAXSIZE 20
 
 Directory *createDirectory(Directory *parent, char *name) {
     Directory *dir = (Directory *)malloc(sizeof(Directory));
@@ -22,11 +23,20 @@ Directory *createDirectory(Directory *parent, char *name) {
         
 
     if (parent != NULL) {
-        if (parent->childCount >= 20) {
-            printf("Not today");
+        if (parent->childCount >= MAXSIZE) {
+            printf("Cannot add any more directories");
             free(dir->name);
             free(dir);
             return NULL;
+        }
+        
+        for (int i = 0; i < parent->childCount; i++) {
+        	if (strcmp(parent->child[i]->name, name) == 0) {
+        		printf("Directory already exist\n");
+        		free(dir->name);
+                        free(dir);
+                        return NULL;
+        	}
         }
         parent->child[parent->childCount] = dir;
         parent->childCount++;
@@ -59,9 +69,9 @@ File *createFile(Directory *parent, char *name, int size) {
       return NULL;
    }
 
-   if(parent->fileCount >= 20) {
+   if(parent->fileCount >= MAXSIZE) {
       free(file);
-   	printf("Not today");
+      printf("Cannot add any more files to this directory ");
    	
    }
    else {
@@ -69,6 +79,14 @@ File *createFile(Directory *parent, char *name, int size) {
         file->parent = parent;
         file->size = size;
    }
+   
+   for (int i = 0; i < parent->fileCount; i++) {
+        	if (strcmp(parent->file[i]->name, name) == 0) {
+        		printf("File already exist\n");
+                        free(file);
+                        return NULL;
+        	}
+        }
    parent->file[parent->fileCount] = file;
    parent->fileCount++;
 
@@ -152,10 +170,6 @@ void freeDirectory(Directory *dir) {
           freeDirectory(dir->child[i]);
        }
     }
-    
-
     free(dir->name);
     free(dir);
-
 }
-
