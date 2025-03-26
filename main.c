@@ -42,7 +42,7 @@ int main(int argc, char * * argv) {
                    printf("Error: Parent directory '%s' not found.\n", pname);
                 } 
                 else {
-                   createDirectory(parent, name);
+                   createDirectory(parent, name);s
                 }
                 break;
 
@@ -63,7 +63,10 @@ int main(int argc, char * * argv) {
                 break;
 
             case 3:
-                listDirectory(root, 0);
+                printf("Enter Directory Name: ");
+                scanf(" %s", name);
+                parent = findDirectory(root, name);
+                listDirectory(parent, 0);
                 break;
 
             case 4:
